@@ -89,7 +89,7 @@ struct SettingsView: View {
                     VStack(alignment: .leading, spacing: 8) {
                         Text("iOS 27.0")
                             .font(.body)
-                        ForEach(ExploitSupportPolicy.verifiedIOS27Builds, id: \.build) { version in
+                        ForEach(ExploitSupportPolicy.verifiedIOS27Betas, id: \.build) { version in
                             Text(versionLabel(version))
                             .font(.caption.monospaced())
                             .foregroundStyle(.secondary)
