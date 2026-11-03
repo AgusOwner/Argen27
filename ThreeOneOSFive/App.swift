@@ -125,7 +125,8 @@ class AppState: ObservableObject {
 
     func detectSupport() {
         let v = AppInfo.versionTuple
-        let supported = ExploitSupportPolicy.isSupported(
+        let known = v.major >= 17
+        let verified = ExploitSupportPolicy.isVerifiedBuild(
             major: v.major,
             minor: v.minor,
             patch: v.patch,
@@ -137,10 +138,16 @@ class AppState: ObservableObject {
         }
 #endif
 
-        unsupportedMessage = supported ? nil : "iOS \(AppInfo.osVersion) (\(AppInfo.osBuild))"
-        if let unsupportedMessage {
-            exploitStatus = .unsupported(unsupportedMessage)
+        // Solo se marca no soportado por debajo de iOS 17. De ahí en adelante
+        // se intenta siempre, aunque la build no esté en ninguna lista.
+        unsupportedMessage = known ? nil : "iOS \(AppInfo.osVersion) (\(AppInfo.osBuild))"
+        if unsupportedMessage != nil {
+            exploitStatus = .unsupported("iOS \(AppInfo.osVersion) (\(AppInfo.osBuild))")
             return
+        }
+
+        if !verified {
+            log("app: build sin verificar iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) — se intenta igual")
         }
 
         let applicable = KernelExploit.isApplicable(
