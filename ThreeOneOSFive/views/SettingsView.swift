@@ -109,37 +109,22 @@ struct SettingsView: View {
                         url: "https://discord.gg/AJdK8NtDBN"
                     )
                     creditsRow(
-                        name: "Cộng Đồng IOSVN",
+                        name: "Aleizn",
                         role: language.text("social.iosvn_role"),
-                        url: "https://t.me/ioscrackvn"
+                        url: "wa.me/51992621601"
                     )
                 }
 
                 Section(language.text("settings.credits")) {
                     creditsRow(
-                        name: "YangJiii",
-                        role: language.text("credit.yangjiii"),
-                        url: "https://x.com/duongduong0908"
-                    )
-                    creditsRow(
-                        name: "0xjohnnydev",
+                        name: "aleizn",
                         role: language.text("credit.filzaslop"),
-                        url: "https://github.com/0xjohnnydev/FilzaSlop"
+                        url: "wa.me/51992621601"
                     )
                     creditsRow(
-                        name: "LeminLimez",
-                        role: language.text("credit.pocket_poster"),
-                        url: "https://github.com/leminlimez/Pocket-Poster"
-                    )
-                    creditsRow(
-                        name: "CrazyMind90",
-                        role: language.text("credit.sandbox_escape"),
-                        url: "https://github.com/CrazyMind90"
-                    )
-                    creditsRow(
-                        name: "forcequitOS",
+                        name: "discord",
                         role: language.text("credit.forcequit"),
-                        url: "https://github.com/forcequitOS"
+                        url: "https://discord.gg/AJdK8NtDBN"
                     )
                 }
             }
