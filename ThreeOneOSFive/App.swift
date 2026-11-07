@@ -19,6 +19,9 @@ struct ThreeOneOSFiveApp: App {
     init() {
         setupLogCapture()
         log("app: 3105 launching — iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
+        // Antes de que se construya PatchProjectStore, para que su carga
+        // inicial ya incluya los paquetes incluidos en el bundle.
+        BundledPatchSeeder.seedIfNeeded()
     }
 
     private var language: AppLanguage {
@@ -89,6 +92,11 @@ struct ThreeOneOSFiveApp: App {
                 )
             }
             .onAppear {
+                // Red de seguridad: si el sembrado del init no llegó a copiar
+                // nada y acá sí se instala algo, refrescamos la librería.
+                if BundledPatchSeeder.seedIfNeeded() > 0 {
+                    patchStore.reload()
+                }
                 if isLicensed, !showOnboarding {
                     appState.detectSupport()
                     checkForUpdate()
@@ -125,8 +133,7 @@ class AppState: ObservableObject {
 
     func detectSupport() {
         let v = AppInfo.versionTuple
-        let known = v.major >= 17
-        let verified = ExploitSupportPolicy.isVerifiedBuild(
+        let supported = ExploitSupportPolicy.isSupported(
             major: v.major,
             minor: v.minor,
             patch: v.patch,
@@ -138,16 +145,10 @@ class AppState: ObservableObject {
         }
 #endif
 
-        // Solo se marca no soportado por debajo de iOS 17. De ahí en adelante
-        // se intenta siempre, aunque la build no esté en ninguna lista.
-        unsupportedMessage = known ? nil : "iOS \(AppInfo.osVersion) (\(AppInfo.osBuild))"
-        if unsupportedMessage != nil {
-            exploitStatus = .unsupported("iOS \(AppInfo.osVersion) (\(AppInfo.osBuild))")
+        unsupportedMessage = supported ? nil : "iOS \(AppInfo.osVersion) (\(AppInfo.osBuild))"
+        if let unsupportedMessage {
+            exploitStatus = .unsupported(unsupportedMessage)
             return
-        }
-
-        if !verified {
-            log("app: build sin verificar iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) — se intenta igual")
         }
 
         let applicable = KernelExploit.isApplicable(

@@ -3,10 +3,10 @@ import Foundation
 enum ExploitSupportPolicy {
     static let verifiedIOS17Range = "17.0–17.7.x"
     static let verifiedIOS18Range = "18.0–18.7.1"
-    static let verifiedIOS26Range = "26.0–26.x"
-    static let verifiedIOS27Range = "27.0–27.x"
+    static let verifiedIOS26Range = "26.0–26.7.2"
+    static let verifiedIOS27Range = "27.0–27.2"
 
-    /// Builds beta conocidas. Solo se usan para mostrar el número de beta.
+    /// Builds beta de iOS 27.0, previos al lanzamiento final.
     static let verifiedIOS27Betas: [(beta: Int, publicBeta: Int?, build: String)] = [
         (1, nil, "24A5355q"),
         (2, nil, "24A5370h"),
@@ -17,11 +17,13 @@ enum ExploitSupportPolicy {
         (7, 5, "24A5424a")
     ]
 
-    /// Builds finales conocidas, por versión. Solo informativas.
+    /// Builds finales (release) de iOS 27, por versión. Actualizar cuando Apple
+    /// publique una versión nueva; no afecta si el exploit sigue funcionando ahí,
+    /// solo si la app deja de bloquear el botón para esa versión.
     static let verifiedIOS27ReleaseBuilds: [String: [String]] = [
-        "27.0": ["24A435", "24A437"],
+        "27.0": ["24A435", "24A437"],      // RC y RTM
         "27.0.1": ["24A446"],
-        "27.2": ["24B115", "24B119"]
+        "27.2": ["24B115", "24B119"]       // RC y RTM
     ]
 
     static func iOS27BetaNumber(for build: String) -> Int? {
@@ -32,27 +34,44 @@ enum ExploitSupportPolicy {
         verifiedIOS27Betas.first { $0.build == build }?.publicBeta
     }
 
-    /// iOS 17 y 18 usan el exploit de kernel opt-in.
     static func supportsKernelExploit(major: Int, minor: Int, patch: Int) -> Bool {
         guard minor >= 0, patch >= 0 else { return false }
-        if major == 17 { return minor <= 7 }
-        if major == 18 { return minor < 7 || (minor == 7 && patch <= 1) }
+
+        if major == 17 {
+            return minor <= 7
+        }
+
+        if major == 18 {
+            return minor < 7 || (minor == 7 && patch <= 1)
+        }
+
         return false
     }
 
-    /// iOS 26 y 27 comparten la misma cadena (kexploit + sandbox_escape).
-    /// Se acepta cualquier minor y cualquier patch de esas versiones, y
-    /// también cualquier versión posterior. La build ya no bloquea nada:
-    /// se intenta y el propio exploit decide.
     static func isSupported(major: Int, minor: Int, patch: Int, build: String) -> Bool {
-        if supportsKernelExploit(major: major, minor: minor, patch: patch) { return true }
-        return major >= 26
-    }
+        if supportsKernelExploit(major: major, minor: minor, patch: patch) {
+            return true
+        }
 
-    /// Todo lo que llega a isSupported cuenta como verificado, para que la
-    /// interfaz no muestre advertencias en builds no listadas.
-    static func isVerifiedBuild(major: Int, minor: Int, patch: Int, build: String) -> Bool {
-        if supportsKernelExploit(major: major, minor: minor, patch: patch) { return true }
-        return major >= 26
+        if major == 26 {
+            guard minor >= 0, patch >= 0 else { return false }
+            // Cubre 26.0 a 26.7.2
+            return minor < 7 || (minor == 7 && patch <= 2)
+        }
+
+        guard major == 27 else { return false }
+
+        // Betas de iOS 27.0
+        if minor == 0, patch == 0, iOS27BetaNumber(for: build) != nil {
+            return true
+        }
+
+        // Versiones finales ya publicadas (27.0, 27.0.1, 27.2)
+        let versionKey = patch == 0 ? "\(major).\(minor)" : "\(major).\(minor).\(patch)"
+        if let builds = verifiedIOS27ReleaseBuilds[versionKey] {
+            return builds.contains(build)
+        }
+
+        return false
     }
 }
