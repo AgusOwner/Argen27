@@ -63,6 +63,10 @@ enum BundledPatchSeeder {
         guard let data = try? Data(contentsOf: url, options: .mappedIfSafe),
               let summary = try? PatchPackageCodec.inspect(data) else { return }
         try? PatchProjectLibrary.markAsAuthorCopy(packageID: summary.packageID)
+        // Distinto del marcador anterior: evita que este paquete por defecto
+        // bloquee la importación manual de parches propios que toquen el
+        // mismo archivo (ver overlappingTargetPath en PatchProjectLibrary).
+        try? PatchProjectLibrary.markAsSeeded(packageID: summary.packageID)
     }
 
     private static func bundledPackages() -> [URL] {
