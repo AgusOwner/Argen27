@@ -45,6 +45,10 @@ enum PatchProjectLibrary {
     /// toque el mismo archivo. La colisión real (dos parches APLICADOS al
     /// mismo archivo) se sigue controlando aparte en PatchTransaction.
     private static let seededDirectoryName = ".Seeded"
+    /// Paquetes sembrados que el usuario borró explícitamente desde la app.
+    /// BundledPatchSeeder revisa esto antes de reinstalar, para no revivir
+    /// en el próximo arranque algo que el usuario sacó a propósito.
+    private static let removedByUserDirectoryName = ".RemovedByUser"
 
     static func packageRootURL(fileManager: FileManager = .default) throws -> URL {
         let base = try fileManager.url(
@@ -211,6 +215,32 @@ enum PatchProjectLibrary {
         )
     }
 
+    /// Marca un packageID como "el usuario lo borró a propósito". Solo
+    /// aplica a paquetes que eran .Seeded; BundledPatchSeeder lo consulta
+    /// antes de reinstalar un paquete del bundle.
+    static func markAsRemovedByUser(
+        packageID: UUID,
+        fileManager: FileManager = .default
+    ) throws {
+        let root = try removedByUserRootURL(fileManager: fileManager)
+        try Data().write(
+            to: root.appendingPathComponent(packageID.uuidString),
+            options: [.atomic, .completeFileProtection]
+        )
+    }
+
+    static func isRemovedByUser(
+        packageID: UUID,
+        fileManager: FileManager = .default
+    ) -> Bool {
+        guard let root = try? removedByUserRootURL(fileManager: fileManager) else {
+            return false
+        }
+        return fileManager.fileExists(
+            atPath: root.appendingPathComponent(packageID.uuidString).path
+        )
+    }
+
     static func overlappingTargetPath(
         in project: PatchProject,
         excludingPackageID: UUID,
@@ -324,6 +354,7 @@ enum PatchProjectLibrary {
         ) == nil else {
             throw PatchPackageError.activePatchCannotBeDeleted
         }
+        let wasSeeded = isSeeded(packageID: item.id, fileManager: fileManager)
         if fileManager.fileExists(atPath: item.packageURL.path) {
             try fileManager.removeItem(at: item.packageURL)
         }
@@ -346,6 +377,9 @@ enum PatchProjectLibrary {
             if fileManager.fileExists(atPath: marker.path) {
                 try? fileManager.removeItem(at: marker)
             }
+        }
+        if wasSeeded {
+            try? markAsRemovedByUser(packageID: item.id, fileManager: fileManager)
         }
     }
 
@@ -415,6 +449,15 @@ enum PatchProjectLibrary {
     ) throws -> URL {
         let root = try packageRootURL(fileManager: fileManager)
             .appendingPathComponent(seededDirectoryName, isDirectory: true)
+        try fileManager.createDirectory(at: root, withIntermediateDirectories: true)
+        return root
+    }
+
+    private static func removedByUserRootURL(
+        fileManager: FileManager
+    ) throws -> URL {
+        let root = try packageRootURL(fileManager: fileManager)
+            .appendingPathComponent(removedByUserDirectoryName, isDirectory: true)
         try fileManager.createDirectory(at: root, withIntermediateDirectories: true)
         return root
     }
