@@ -345,8 +345,8 @@
 			);
 			dependencies = (
 			);
-			name = Argent;
-			productName = Argent;
+			name = FoxRank;
+			productName = FoxRank;
 			productReference = 3105A010;
 			productType = "com.apple.product-type.application";
 		};
@@ -488,7 +488,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreeOneOSFive/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Argent;
+<<<<<<< HEAD
+				INFOPLIST_KEY_CFBundleDisplayName = "Fox Rank";
+=======
+				INFOPLIST_KEY_CFBundleDisplayName = "FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -502,8 +506,8 @@
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.mobile.MobileHouseArrest";
-				PRODUCT_NAME = Argent;
-				EXECUTABLE_NAME = Argent;
+				PRODUCT_NAME = FoxRank;
+				EXECUTABLE_NAME = FoxRank;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ThreeOneOSFive/ThreeOneOSFive-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -523,7 +527,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreeOneOSFive/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Argent;
+<<<<<<< HEAD
+				INFOPLIST_KEY_CFBundleDisplayName = "Fox Rank";
+=======
+				INFOPLIST_KEY_CFBundleDisplayName = "FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -537,8 +545,8 @@
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = "-lz";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.apple.mobile.MobileHouseArrest";
-				PRODUCT_NAME = Argent;
-				EXECUTABLE_NAME = Argent;
+				PRODUCT_NAME = FoxRank;
+				EXECUTABLE_NAME = FoxRank;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "ThreeOneOSFive/ThreeOneOSFive-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
