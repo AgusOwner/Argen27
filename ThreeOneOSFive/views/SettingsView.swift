@@ -17,7 +17,11 @@ struct SettingsView: View {
                         AppLogo()
 
                         VStack(alignment: .leading, spacing: 3) {
+<<<<<<< HEAD
                             Text("Fox Rank").font(.headline)
+=======
+                            Text("FoxRank").font(.headline)
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
                             Text(language.text("common.version", appVersion))
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)

@@ -20,7 +20,11 @@
 "update.dismiss" = "Don't show again";
 "patch.error.wrong_password" = "Incorrect password.";
 
+<<<<<<< HEAD
 "attribution.title" = "About Fox Rank";
+=======
+"attribution.title" = "About FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 "attribution.subtitle" = "Project information";
 "attribution.link_section" = "Project link";
 "attribution.url" = "URL";
@@ -31,8 +35,13 @@
 "onboarding.language_title" = "Choose your language";
 "onboarding.language_subtitle" = "You can change this later in Settings.";
 "onboarding.language_hint" = "Selected: %@";
+<<<<<<< HEAD
 "onboarding.welcome_title" = "Bienvenido Panel Fox Rank";
 "onboarding.welcome_message" = "Developed by Fox Rank";
+=======
+"onboarding.welcome_title" = "Bienvenido Panel FoxRank";
+"onboarding.welcome_message" = "Developed by FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 "onboarding.welcome_badge" = "Official 3105 identity";
 "onboarding.versions_title" = "Supported iOS versions";
 "onboarding.versions_subtitle" = "3105 is verified on the ranges below. Unsupported builds are blocked.";

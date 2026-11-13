@@ -20,7 +20,11 @@
 "update.dismiss" = "Không hiển thị lại";
 "patch.error.wrong_password" = "Sai mật khẩu.";
 
+<<<<<<< HEAD
 "attribution.title" = "Giới thiệu Fox Rank";
+=======
+"attribution.title" = "Giới thiệu FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 "attribution.subtitle" = "Thông tin dự án";
 "attribution.link_section" = "Liên kết dự án";
 "attribution.url" = "URL";
@@ -277,7 +281,11 @@
 "settings.sandbox_token" = "Token sandbox";
 "settings.generate_token" = "Tạo token";
 "settings.token_footer" = "Khả dụng sau khi exploit cấp quyền thành công.";
+<<<<<<< HEAD
 "settings.credits" = "Fox Rank";
+=======
+"settings.credits" = "FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 "settings.social_media" = "Mạng Xã Hội";
 "social.github_role" = "Mã nguồn 3105";
 "social.iosvn_role" = "Cộng Đồng IOSVN";

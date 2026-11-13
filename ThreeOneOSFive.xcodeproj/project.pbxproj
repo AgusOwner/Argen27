@@ -488,7 +488,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreeOneOSFive/Info.plist;
+<<<<<<< HEAD
 				INFOPLIST_KEY_CFBundleDisplayName = "Fox Rank";
+=======
+				INFOPLIST_KEY_CFBundleDisplayName = "FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -523,7 +527,11 @@
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ThreeOneOSFive/Info.plist;
+<<<<<<< HEAD
 				INFOPLIST_KEY_CFBundleDisplayName = "Fox Rank";
+=======
+				INFOPLIST_KEY_CFBundleDisplayName = "FoxRank";
+>>>>>>> feb4836bbe5445dc35d8c914ef6182c9e0f082c5
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
