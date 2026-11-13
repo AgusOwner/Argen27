@@ -32,7 +32,7 @@ struct LicenseGateView: View {
                     .frame(width: 140, height: 140)
                     .padding(.bottom, 8)
 
-                Text("Fox Rank")
+                Text("FoxRank")
                     .font(.largeTitle.bold())
                     .foregroundStyle(.white)
 

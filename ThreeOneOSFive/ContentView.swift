@@ -109,7 +109,7 @@ struct ContentView: View {
                     )
                 }
             }
-            .navigationTitle("Fox Rank")
+            .navigationTitle("FoxRank")
             .navigationSplitViewColumnWidth(min: 210, ideal: 240, max: 300)
         } detail: {
             sectionContent(selectedVisibleSection)

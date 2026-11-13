@@ -137,14 +137,14 @@ struct AppDataBrowserView: View {
                     let workspaceDestination = FileBrowserDestination(
                         containerPath: workspaceURL.path,
                         startPath: workspaceURL.path,
-                        title: "Fox Rank",
+                        title: "FoxRank",
                         bundleID: nil
                     )
                     NavigationLink(value: workspaceDestination) {
                         HStack(spacing: 10) {
                             AppRowIcon(systemName: "folder.fill")
                             VStack(alignment: .leading, spacing: 2) {
-                                Text("Fox Rank")
+                                Text("FoxRank")
                                     .font(.subheadline.weight(.semibold))
                                 Text(language.text("browser.workspace_subtitle"))
                                     .font(.caption)
